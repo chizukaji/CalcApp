@@ -1,5 +1,6 @@
 package jp.techacademy.chizu.calcapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View){
+        val view = this.currentFocus
+        if (view != null){
+            val manager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
 
         if(editText1.text.toString() == "" || editText2.text.toString() == ""){
             val mySnackbar = Snackbar.make(v , "数字を2つ入力してください。", Snackbar.LENGTH_LONG)
